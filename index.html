@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Peshawar Green Spaces Atlas</title>
+  <meta name="description" content="Interactive web map of parks, gardens and green spaces in Peshawar, built with Leaflet and the OpenStreetMap Overpass API.">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <aside class="panel" aria-label="Controls and results">
+      <header class="panel-head">
+        <h1>Peshawar Green Spaces Atlas</h1>
+        <p class="lede">
+          Peshawar, the "City of Flowers", has Mughal-era gardens such as Shahi Bagh and Wazir Bagh,
+          the university campus greens, and many small neighbourhood parks. This map shows what
+          volunteers have recorded in OpenStreetMap across the city, from Hayatabad to the old walled city.
+        </p>
+      </header>
+
+      <section class="controls">
+        <label for="search" class="field-label">Search by name</label>
+        <input id="search" type="search" placeholder="e.g. Shahi Bagh, Wazir Bagh, Hayatabad" autocomplete="off">
+
+        <fieldset class="chips" id="chips">
+          <legend class="field-label">Type of green space</legend>
+          <!-- chips are generated in script.js -->
+        </fieldset>
+
+        <label class="check">
+          <input type="checkbox" id="namedOnly">
+          <span>Show only places that have a name</span>
+        </label>
+
+        <div class="row">
+          <button type="button" id="nearBtn" class="btn">Find parks near me</button>
+          <button type="button" id="resetBtn" class="btn btn-quiet">Reset filters</button>
+        </div>
+      </section>
+
+      <section class="stats" aria-live="polite">
+        <div><strong id="statCount">0</strong><span>places shown</span></div>
+        <div><strong id="statArea">0</strong><span>hectares mapped</span></div>
+      </section>
+
+      <div id="status" class="status" role="status"></div>
+
+      <ul id="list" class="list" aria-label="Matching places"></ul>
+
+      <footer class="panel-foot">
+        <p><strong>Study area:</strong> Peshawar city and surroundings, Khyber Pakhtunkhwa, Pakistan.</p>
+        <p><strong>Data source:</strong> OpenStreetMap through the
+          <a href="https://overpass-api.de/" target="_blank" rel="noopener">Overpass API</a>.
+          Coverage depends on volunteer mapping, so some parks may be missing or unnamed.</p>
+        <p>&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> (ODbL).
+          Map library: <a href="https://leafletjs.com" target="_blank" rel="noopener">Leaflet</a>.</p>
+      </footer>
+    </aside>
+
+    <main class="map-wrap">
+      <div id="map" aria-label="Map of green spaces in Peshawar"></div>
+
+      <div id="loader" class="loader" role="status">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Loading green spaces from OpenStreetMap...</p>
+      </div>
+
+      <div id="error" class="error" role="alert" hidden>
+        <p id="errorMsg"></p>
+        <button type="button" id="retryBtn" class="btn">Try again</button>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="script.js"></script>
+</body>
+</html>
